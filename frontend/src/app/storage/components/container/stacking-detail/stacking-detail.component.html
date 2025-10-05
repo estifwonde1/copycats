@@ -1,0 +1,46 @@
+<div class="filter-container">
+  <p-dropdown [options]="receiptAuthorizations$|async" 
+              [(ngModel)]="selectedAuthorizedReceipt" 
+              placeholder="Select Receipt Authorization" 
+              (onChange)="onAuthorizedReceiptChange()" 
+              optionLabel="label"
+              [filter]="true"
+              filterBy="label">
+  </p-dropdown>
+</div>
+<p-confirmDialog header="Confirmation" icon="pi pi-exclamation-triangle"></p-confirmDialog>
+<div class="commodity-info">
+  <div class="item">
+      <h3 class="title"><span>Commodity Category: </span>{{(commodity$|async)?.name}}</h3>
+    </div>
+  <div class="item">
+    <h3 class="title"><span>Commodity Batch No: </span>{{(commodity$|async)?.batch_no}}</h3>
+  </div>
+  <div class="item">
+    <h3 class="title"><span>Dispatch Reference: </span>{{selectedAuthorizedReceipt?.dispatch_reference_no}}</h3>
+  </div>
+  <div class="item">
+    <h3 class="title"><span>Received Quantity: </span>
+      {{selectedAuthorizedReceipt?.received_quantity}} {{selectedAuthorizedReceipt?.unit_abbreviation}}
+    </h3>
+  </div>
+  <div class="item">
+    <h3 class="title">
+      <span>Remaining Quantity: </span>
+      <span class="remaining-value">{{selectedAuthorizedReceipt?.received_quantity-(currentStackingQuantity$|async)}}</span>
+      <span> {{selectedAuthorizedReceipt?.unit_abbreviation}}</span>
+    </h3>
+  </div>
+</div>
+
+<cats-toolbar [actions]=actions
+              (actionClick)="onToolbarActionClick($event)">
+</cats-toolbar>
+
+<cats-list [columns]="columns"
+          [caption]="'Receipt Transactions'"
+          [actions]="tableActions"
+          [hasAction]="true"
+          [data]="receiptTransactions$|async"
+          (actionClick)="onTableActionClick($event)">
+</cats-list>

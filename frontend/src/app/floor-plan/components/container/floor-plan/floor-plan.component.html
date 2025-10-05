@@ -1,0 +1,47 @@
+<div class="action-info-toolbar">
+  <cats-toolbar 
+                [actions]="actions"
+               (actionClick)="beforeEditCheck()">
+  </cats-toolbar>
+  <div class="info">
+    <div class="color-info">
+      <h3 class="title"><div class='box green m-1'></div><span>Reserved Stack: </span></h3>
+      <h3 class="title"><div class='box red m-1'></div><span>Allocated Stack: </span></h3>
+    </div>
+  </div>
+</div>
+<div *ngIf="store" class="flex flex-wrap space card">
+    <h3 class="pl-3 title"><span>Store Width: {{store?.width}}m</span></h3>
+    <h3 class="title"><span>Store Length: {{store?.length}}m</span></h3>
+    <h3 class="title"><span>Store Height: {{store?.height}}m</span></h3>
+    <h3 class="title mr-1"><span>Commodity Name: {{commodity?.commodity_name}}</span></h3>
+</div>
+<div class="toolbar">
+  <div class="info-card toolbar-item-left">
+    <p-dropdown class="toolbar-item"
+                [options]="stores$|async" 
+                [optionLabel]="'name'" 
+                [(ngModel)]="store" 
+                placeholder="Store" 
+                (onChange)="onStoreChange()">
+    </p-dropdown>
+    <p-dropdown class="toolbar-item"
+                [options]="commodities$|async" 
+                [optionLabel]="'batch_no'" 
+                [(ngModel)]="commodity" 
+                placeholder="Commodity" 
+                (onChange)="onCommodityChange()"
+                [showClear]="true">
+    </p-dropdown>
+  </div>
+  <div class="info-card toolbar-item-right">
+    <h3><strong>Current Mouse Position: </strong>({{currentMousePosisitionX|number}}, {{currentMousePosisitionY|number}})</h3>
+    <h3><strong>Length: </strong>{{(mouseIsDown && (currentMousePosisitionX - startX)) || 0|number}}</h3>
+    <h3><strong>Width: </strong>{{(mouseIsDown && (currentMousePosisitionY - startY)) || 0|number}}</h3>
+  </div>
+</div>
+<div class="wrapper">
+  <canvas id="canvas-bottom" [ngClass]="{'hide-canvas': !store}" #canvasBottom></canvas>
+  <canvas id="canvas-top" [ngClass]="{'hide-canvas': !store}" #canvas></canvas>
+</div>
+

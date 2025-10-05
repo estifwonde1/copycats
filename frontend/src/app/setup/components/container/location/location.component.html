@@ -1,0 +1,25 @@
+<cats-location-filter [locationTypes]="locationTypes"
+                     [allLocationAncestries]="allLocationAncestries"
+                     [selectedLocationAncestries]="selectedLocationAncestries"
+                     (locationTypeChage)="onLocationTypeChange($event)">
+</cats-location-filter>
+
+<span class="p-input-icon-left">
+    <i class="pi pi-search"></i>
+    <input class="search-box"
+     type="text" pInputText
+     [(ngModel)]="searchKey"
+     (keydown.enter)="searchLocation()"
+     placeholder="Serach by name">         
+</span>
+
+<cats-toolbar [actions]="actions"
+             (actionClick)="onCreate()">
+</cats-toolbar>
+<cats-list [columns]="columns"
+          [caption]="caption"
+          [actions]="tableActions"
+          [hasAction]="true"
+          [data]="locations$|async"
+          (actionClick)="onEdit($event)">
+</cats-list>

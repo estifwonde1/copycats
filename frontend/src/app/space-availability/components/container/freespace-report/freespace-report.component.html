@@ -1,0 +1,55 @@
+<div class="filter">
+    <p-dropdown [options]="hubs$|async"
+                [(ngModel)]="selectedHub"
+                optionLabel="name"
+                placeholder='Select Hub'
+                (onChange)="onHubChange($event)"
+                [style] = "{'width': '100%'}"
+    >
+    </p-dropdown>
+    <p-dropdown [options]="warehouses$|async"
+                [(ngModel)]="selectedWarehouse"
+                optionLabel="name"
+                placeholder='Select Warehouse'
+                (onChange)="onWarehouseChange($event)"
+                [style] = "{'width': '100%'}"
+    >
+    </p-dropdown>
+    <p-dropdown [options]="stores$|async"
+                [(ngModel)]="selectedStore"
+                optionLabel="name"
+                placeholder='Select Store'
+                [style] = "{'width': '100%'}"
+    >
+    </p-dropdown>
+    <button class="action-button"
+            mat-raised-button
+            [color]="'success'"
+            [disabled]="!selectedHub"
+            (click)="onFilterClick()">
+      <mat-icon>filter_list</mat-icon>
+      Filter
+    </button>
+</div>
+<p-treeTable [value]="freeSpaces">
+    <ng-template pTemplate="caption">
+        Available Freespaces
+    </ng-template>
+    <ng-template pTemplate="header">
+        <tr>
+            <th> Code </th>
+            <th> Name </th>
+            <th> Freespace (m<sup>2</sup>) </th>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-rowNode let-rowData="rowData">
+        <tr>
+            <td>
+                <p-treeTableToggler [rowNode]="rowNode"></p-treeTableToggler>
+                {{rowData.code}}
+            </td>
+            <td> {{ rowData.name }} </td>
+            <td> {{ rowData.freespace |number}} </td>
+        </tr>
+    </ng-template>
+</p-treeTable>

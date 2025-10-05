@@ -1,0 +1,15 @@
+.filter {
+    display: grid;
+    grid-gap: 1rem;
+}
+
+button {
+    margin-right: 10px;
+}
+
+@media only screen and (min-width: 992px) {
+    .filter {
+        grid-template-columns: 1fr 1fr 1fr;
+        display: grid;
+    }
+}

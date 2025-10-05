@@ -1,0 +1,8 @@
+<cats-list [columns]="columns"
+           [caption]="caption"
+           [actions]="tableActions"
+           [hasAction]="true"
+           [data]="roundPlans$|async"
+           (actionClick)="onClick($event)">
+</cats-list>
+<p-confirmDialog header="Confirmation" icon="pi pi-exclamation-triangle"></p-confirmDialog>

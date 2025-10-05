@@ -1,0 +1,89 @@
+<h2 mat-dialog-title>{{data.title}}</h2>
+<div mat-dialog-content>
+    <form [formGroup]="form" (submit)="onSubmit()">
+        <mat-form-field class="full-width">
+            <input matInput type="text" placeholder="First Name" formControlName="first_name" (blur)="blur()">
+            <mat-error *ngIf="displayMessage.first_name">{{ displayMessage.first_name }}</mat-error>
+        </mat-form-field>
+        <mat-form-field class="full-width">
+            <input matInput type="text" placeholder="Last Name" formControlName="last_name" (blur)="blur()">
+            <mat-error *ngIf="displayMessage.last_name">{{ displayMessage.last_name }}</mat-error>
+        </mat-form-field>
+        <mat-form-field class="full-width">
+            <input matInput type="text" placeholder="Phone Number" formControlName="phone_number" (blur)="blur()">
+            <mat-error *ngIf="displayMessage.phone_number">{{ displayMessage.phone_number }}</mat-error>
+        </mat-form-field>
+        <mat-form-field class="full-width">
+            <input matInput type="text" placeholder="Email" formControlName="email" (blur)="blur()">
+            <mat-error *ngIf="displayMessage.email">{{ displayMessage.email }}</mat-error>
+        </mat-form-field>
+        <div *ngIf="!data.formData.id">
+          <mat-form-field class="full-width">
+            <mat-label>Password</mat-label>
+            <input
+              matInput
+              [type]="hide ? 'password' : 'text'"
+              required
+              formControlName="password"
+              (input)="onPasswordInput()"
+              (blur)="blur()"
+            />
+            <button
+              type="button"
+              mat-icon-button
+              matSuffix
+              (click)="hide = !hide"
+              [attr.aria-label]="'Hide password'"
+              [attr.aria-pressed]="hide"
+            >
+              <mat-icon>{{
+                hide ? "visibility_off" : "visibility"
+              }}</mat-icon>
+            </button>
+            <mat-error *ngIf="displayMessage.password">{{ displayMessage.password }}</mat-error>
+          </mat-form-field>
+          <mat-form-field class="full-width">
+            <mat-label>Confirm Password</mat-label>
+            <input
+              matInput
+              [type]="hide ? 'password' : 'text'"
+              required
+              formControlName="password_confirmation"
+              (input)="onPasswordInput()"
+              (blur)="blur()"
+            />
+            <button
+              type="button"
+              mat-icon-button
+              matSuffix
+              (click)="hide = !hide"
+              [attr.aria-label]="'Hide password'"
+              [attr.aria-pressed]="hide"
+            >
+              <mat-icon>{{
+                hide ? "visibility_off" : "visibility"
+              }}</mat-icon>
+            </button>
+            <mat-error *ngIf="displayMessage.password_confirmation">{{ displayMessage.password_confirmation }}</mat-error>
+          </mat-form-field>
+        </div>
+    </form>
+</div>
+<div mat-dialog-actions align="end">
+    <button mat-raised-button
+            color="success"
+            type="submit"
+            [disabled]="!form.valid"
+            (click)="onSubmit()">
+        <mat-icon>save</mat-icon>
+        Save
+    </button>
+    &nbsp;
+    <button mat-raised-button
+            type="button"
+            color="warn"
+            (click)="onCancel()">
+        <mat-icon>remove_circle</mat-icon>
+        Cancel
+    </button>
+</div>

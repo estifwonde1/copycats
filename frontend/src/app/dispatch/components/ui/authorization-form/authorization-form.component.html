@@ -1,0 +1,32 @@
+<h2 mat-dialog-title>Issue Authorization</h2>
+<div mat-dialog-content>
+    <form [formGroup]="form" (submit)="onSubmit()">
+        <mat-form-field class="full-width">
+            <input matInput type="text" placeholder="Prepared by" formControlName="prepared_by">
+        </mat-form-field>
+        <mat-form-field class="full-width">
+            <input matInput type="text" placeholder="Approved by" formControlName="approved_by">
+        </mat-form-field>
+        <mat-form-field class="full-width">
+            <input matInput type="text" placeholder="Authorized by" formControlName="authorized_by">
+        </mat-form-field>
+    </form>
+</div>
+<div mat-dialog-actions align="end">
+    <button mat-raised-button
+            color="success"
+            type="submit"
+            [disabled]="!form.valid"
+            (click)="onSubmit()">
+        <mat-icon>save</mat-icon>
+        Save
+    </button>
+    &nbsp;
+    <button mat-raised-button
+            type="button"
+            color="warn"
+            (click)="onCancel()">
+        <mat-icon>remove_circle</mat-icon>
+        Cancel
+    </button>
+</div>

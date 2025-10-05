@@ -1,0 +1,58 @@
+<h2 mat-dialog-title>{{data.title}}</h2>
+<div mat-dialog-content>
+  <form [formGroup]="form" (submit)="onSubmit()">
+    <mat-form-field class="full-width">
+      <input matInput type="text" placeholder="Code" formControlName="code" (blur)="blur()">
+      <mat-error *ngIf="displayMessage.code">{{ displayMessage.code }}</mat-error>
+    </mat-form-field>
+    <mat-form-field class="full-width">
+      <input matInput type="text" placeholder="Name" formControlName="name" (blur)="blur()">
+      <mat-error *ngIf="displayMessage.name">{{ displayMessage.name }}</mat-error>
+    </mat-form-field>
+    <mat-form-field class="full-width">
+      <input matInput type="number" placeholder="Length" formControlName="length">
+      <mat-error *ngIf="displayMessage.length">{{ displayMessage.length }}</mat-error>
+    </mat-form-field>
+    <mat-form-field class="full-width">
+      <input matInput type="number" placeholder="Width" formControlName="width">
+      <mat-error *ngIf="displayMessage.width">{{ displayMessage.width }}</mat-error>
+    </mat-form-field>
+    <mat-form-field class="full-width">
+      <input matInput type="number" placeholder="Height" formControlName="height">
+      <mat-error *ngIf="displayMessage.height">{{ displayMessage.height }}</mat-error>
+    </mat-form-field>
+    <mat-checkbox class="full-width" formControlName="temporary" color="primary">Temporary</mat-checkbox>
+    <mat-checkbox class="full-width" formControlName="has_gangway" color="primary" (change)="hasGangwayChanged()">Has Gangway</mat-checkbox>
+    <mat-form-field *ngIf="form.controls.has_gangway.value" class="full-width">
+      <input matInput type="number" placeholder="Gangway Length" formControlName="gangway_length">
+      <mat-error *ngIf="displayMessage.gangway_length">{{ displayMessage.gangway_length }}</mat-error>
+    </mat-form-field>
+    <mat-form-field *ngIf="form.controls.has_gangway.value" class="full-width">
+      <input matInput type="number" placeholder="Gangway Width" formControlName="gangway_width">
+      <mat-error *ngIf="displayMessage.gangway_width">{{ displayMessage.gangway_width }}</mat-error>
+    </mat-form-field>
+    <mat-form-field *ngIf="form.controls.has_gangway.value" class="full-width">
+      <input matInput type="number" placeholder="Gangway Corner Distance" formControlName="gangway_corner_dist">
+      <mat-error *ngIf="displayMessage.gangway_corner_dist">{{ displayMessage.gangway_corner_dist }}</mat-error>
+    </mat-form-field>
+</form>
+</div>
+<mat-dialog-actions align="end">
+  <button mat-raised-button
+          color="success"
+          type="submit"
+          (click)="onSubmit()">
+        <mat-icon>save</mat-icon>
+        Save
+  </button>
+  &nbsp;
+  <button mat-raised-button
+          type="button"
+          color="warn"
+          (click)="onCancel()">
+        <mat-icon>remove_circle</mat-icon>
+        Cancel
+  </button>
+</mat-dialog-actions>
+
+

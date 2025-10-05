@@ -1,0 +1,11 @@
+<cats-header [unreadNotifications$]="unreadNotifications$"
+             (toggleMenu)="toggleMenu()" 
+             (logout)="onLogout()" 
+             [username]="username$|async" 
+             (clickNotification)="onNotificationClick($event)">
+</cats-header>
+<div class="cat-content" [ngClass]="{'hidden-menu-content': !isSidebarVisible}">
+  <cats-menu [visible]="isSidebarVisible" [username]="username$|async" [items]="menus$ |async"></cats-menu>
+  <router-outlet></router-outlet>
+</div>
+<cats-footer></cats-footer>

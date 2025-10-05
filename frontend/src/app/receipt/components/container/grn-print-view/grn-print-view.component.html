@@ -1,0 +1,40 @@
+<div class="filter">
+    <p-dropdown [options]="dispatches$|async" 
+                [(ngModel)]="selectedDispatch" 
+                placeholder="Select Dispatch" 
+                (onChange)="onDispatchChange()" 
+                optionLabel="reference_no"
+                [filter]="true"
+                filterBy="reference_no">
+    </p-dropdown>
+
+    <p-dropdown [options]="receiptAuthorizations$ | async"
+      [(ngModel)]="selectedReceiptAuthorization"
+      placeholder="Select Receipt Authorization"
+      [filter]="true"
+      filterBy="store_name">
+        <ng-template pTemplate="selectedItem">
+            <div *ngIf="selectedReceiptAuthorization">
+                <div>
+                    {{selectedReceiptAuthorization.dispatch_reference_no}} - 
+                    {{selectedReceiptAuthorization.store_name}}
+                </div>
+            </div>
+        </ng-template>
+        <ng-template let-receiptAuthorization pTemplate="item">
+            <div>
+                <div>{{receiptAuthorization.dispatch_reference_no}} - 
+                    {{receiptAuthorization.store_name}} </div>
+            </div>
+        </ng-template>
+    </p-dropdown>
+
+    <button mat-raised-button
+            color="success"
+            class="print-button"
+            [disabled]="!selectedReceiptAuthorization"
+            (click)="onPrintButtonClicked()">
+        <mat-icon>print</mat-icon>
+        Print
+    </button>
+</div>

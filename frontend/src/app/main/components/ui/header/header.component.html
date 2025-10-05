@@ -1,0 +1,37 @@
+<div class="cat-header">
+  <div class="cat-header-left left">
+    <div class="header-text right">
+      WAREHOUSE
+    </div>
+    <div class="logo right">
+      <img src="../../../../../assets/images/cats-logo.png" class="logo">
+    </div>
+    <div class="toggle-menu-button left">
+      <a class="icon" (click)="onToggleMenu()"><i class="fa fa-bars"></i></a>
+    </div>
+  </div>
+  <div class="cat-header-right right">
+    <div class="right right-menu">
+      <a class="icon" (click)="onLogout()"><i class="fa fa-sign-out-alt"></i></a>
+    </div>
+    <div class="right right-menu">
+      <a class="icon" style="color: #ffffff;" href="https://sites.google.com/view/cats-help-center/lo?authuser=0" target="_blank">
+        <i matTooltip="Help" class="fa fa-question-circle"></i>
+      </a>
+    </div>
+    <div class="right right-menu" [matMenuTriggerFor]="menu">
+      <a class="icon">
+        <i class="fa fa-bell"></i>
+        <span *ngIf="(unreadNotifications$|async)?.length > 0" class="badge">{{totalUnreadMessages(unreadNotifications$|async)}}</span>
+      </a>
+    </div>
+    <div class="right right-menu">
+      <a class="icon"><span [innerHtml]="username" class="user-name"></span><i class="fa fa-user"></i></a>
+    </div>
+    <mat-menu #menu="matMenu">
+      <cats-notification-menu [unreadNotifications$]="unreadNotifications$" 
+                              (clickNotification)="onNotificationClick($event)">
+      </cats-notification-menu>
+    </mat-menu>
+  </div>
+</div>

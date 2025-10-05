@@ -1,0 +1,15 @@
+<div  class="filter">
+    <p-dropdown [options]="options"
+                [(ngModel)]="selectedOption"
+                optionLabel="label"
+                placeholder='Select Storekeeper Type'
+                (onChange)="onStorekeeperTypeChange()">
+    </p-dropdown>
+</div>
+<cats-list [columns]="columns"
+          [caption]="'Storekeepers'"
+          [actions]="tableActions"
+          [hasAction]="true"
+          [data]="users$|async"
+          (actionClick)="onClick($event)">
+</cats-list>

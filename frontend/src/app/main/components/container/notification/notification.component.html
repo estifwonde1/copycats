@@ -1,0 +1,41 @@
+<div class="container">
+  <h1>Notifications</h1>
+  <p-splitter *ngIf="(notifications$|async).length>0;else noNotification" [panelSizes]="[30,70]">
+    <ng-template pTemplate>
+      <p-listbox [options]="notifications$|async" 
+                 [group]="true" 
+                 [(ngModel)]="selectedNotificationValue" 
+                 [metaKeySelection]="false" 
+                 (onClick)="onClick()">
+        <ng-template let-notification pTemplate="group">
+          <div class="p-d-flex p-ai-center">
+              <span>{{notification?.created_at | timeAgo}}</span>
+          </div>
+        </ng-template>
+        <ng-template let-item pTemplate="item">
+          <div class="notification-container">
+            <div class="notification-title">
+              <h3 [ngClass]="{'unread-font-weight': !(item?.read)}">{{item?.title}}</h3>
+            </div>
+            <div class="notification-content">
+              <div>{{item?.body.substr(0, 100)}} ...</div>
+            </div>
+          </div>
+        </ng-template>
+      </p-listbox>
+    </ng-template>
+    <ng-template pTemplate>
+      <div class="notification-container">
+        <div class="notification-title">
+          <h1>{{selectedNotificationValue?.title}}</h1>
+        </div>
+        <div class="notification-content">
+          {{selectedNotificationValue?.body}}
+        </div>
+      </div>
+    </ng-template>
+  </p-splitter>
+  <ng-template #noNotification>
+    <p>No notifications found.</p>
+  </ng-template>
+</div>

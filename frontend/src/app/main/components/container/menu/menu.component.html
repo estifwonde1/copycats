@@ -1,0 +1,28 @@
+<p-sidebar [visible]="visible" 
+           position="left" 
+           [showCloseIcon]="false" 
+           styleClass="cat-menubar" 
+           [modal]="false" 
+           [transitionOptions]="'500ms'">
+  <p-panelMenu styleClass="cat-panelmenu" [model]="items ? items: []"></p-panelMenu>
+  <div class="additional-menu">
+    <hr>
+    <div (click)="onNotificationClick()" class="menuitem-1">
+      <a class="icon"><i class="fa fa-bell"></i>
+        <span *ngIf="(unreadNotifications$|async)?.length > 0" class="badge">{{totalUnreadMessages(unreadNotifications$|async)}}</span> 
+        Notifications
+      </a>
+    </div>
+    <div class="right right-menu">
+      <a class="icon" style="color: #ffffff;" href="https://sites.google.com/view/cats-help-center/lo?authuser=0" target="_blank">
+        <i class="fa fa-question-circle"></i>
+      </a>
+    </div>
+    <div>
+      <a class="icon"><i class="fa fa-user"></i> {{username}}</a>
+    </div>
+    <div>
+      <a class="icon"><i class="fa fa-sign-out-alt"></i> Logout</a>
+    </div>
+  </div>
+</p-sidebar>

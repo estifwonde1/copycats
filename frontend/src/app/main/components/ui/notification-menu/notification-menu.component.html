@@ -1,0 +1,17 @@
+<div>
+  <button mat-flat-button
+          type="submit"
+          (click)="showAll()">
+    <mat-icon>visibility</mat-icon>
+    Show All
+</button>
+</div>
+<hr>
+<div *ngFor="let notification of unreadNotifications$|async">
+  <h2 class="notification-date">{{notification[0]?.created_at | timeAgo}}</h2>
+  <div *ngFor="let item of notification">
+    <div (click)="onClick(item)" mat-menu-item class="notification-container">
+      <div class="notification-header">{{item?.title}}</div>
+    </div>
+  </div>
+</div>

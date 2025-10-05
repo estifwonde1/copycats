@@ -1,0 +1,258 @@
+@use '@angular/material' as mat;
+
+@import "colors";
+
+@include mat.core();
+
+$cats-warehouse-primary: mat.define-palette(mat.$indigo-palette);
+$cats-warehouse-accent: mat.define-palette(mat.$pink-palette, A200, A100, A400);
+
+$cats-warehouse-warn: mat.define-palette(mat.$red-palette);
+
+$cats-warehouse-theme: mat.define-light-theme(
+  (
+    color: (
+      primary: $cats-warehouse-primary,
+      accent: $cats-warehouse-accent,
+      warn: $cats-warehouse-warn,
+    ),
+  )
+);
+
+@include mat.all-component-themes($cats-warehouse-theme);
+
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+.m-1 {
+  margin: 0.1rem;
+}
+
+.left {
+  float: left;
+}
+
+.right {
+  float: right;
+}
+
+.cat-header,
+.cat-footer {
+  height: 50px;
+  background-image: -webkit-gradient(
+    linear,
+    left top,
+    right top,
+    from($header-footer-bg-color),
+    to($header-footer-bg-color2)
+  );
+  color: $header-footer-color;
+}
+
+.cat-menubar {
+  background-color: $menubar-background !important;
+  height: calc(100% - 100px) !important;
+  overflow: auto;
+  border: none !important;
+  padding: 0px !important;
+  margin-top: 50px;
+  width: 250px !important;
+}
+
+.cat-menubar {
+  box-shadow: none !important;
+}
+
+.cat-header-right {
+  height: 50px;
+}
+
+.p-sidebar .p-sidebar-content {
+  padding: 0;
+}
+
+.p-sidebar .p-sidebar-header {
+  padding: 0;
+}
+
+.p-dialog-footer{
+  .p-confirm-dialog-reject {
+    background-color: #f44336;
+    border: #f44336;
+    &:hover {
+      background-color: #f44336 !important;
+      border: #f44336 !important;
+    }
+  }
+  .p-confirm-dialog-accept {
+    background-color: $success;
+    border: $success;
+    &:hover {
+      background-color: $success !important;
+      border: $success !important;
+    }
+  }
+} 
+
+.card {
+  background-color: #ffffff;
+  border: 1px solid transparent;
+  box-shadow: 0 2px 5px 1px rgb(64 60 67 / 16%);
+  width: 100%;
+  border-radius: 5px;
+}
+
+.space {
+  justify-content: space-between;
+}
+
+.flex {
+  display: flex;
+}
+
+.flex-wrap {
+  flex-wrap: wrap;
+}
+
+.additional-menu {
+  display: none;
+}
+
+.badge {
+  display: inline-block;
+  min-width: 10px;
+  padding: 3px 7px;
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 1;
+  color: #fff;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: middle;
+  background-color: red;
+  border-radius: 10px;
+}
+
+.user-name {
+  font-size: 15px;
+  padding: 5px;
+}
+
+.full-width {
+  width: 100%;
+}
+
+.mat-success {
+  background-color: #1ab394;
+  color: white;
+}
+
+.filter-container {
+  background-color: #ffffff;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid transparent;
+  box-shadow: 0 2px 5px 1px rgb(64 60 67 / 16%);
+  width: 100%;
+  margin: 0 auto;
+}
+
+.p-dropdown {
+  width: 100% !important;
+}
+
+.title {
+  color: rgb(66, 82, 110);
+  span {
+    font-weight: bold;
+  }
+}
+
+.remaining-value {
+  color: rgba(168, 15, 15, 0.788);
+}
+
+.container {
+  background-color: #ffffff;
+  border: 1px solid transparent;
+  box-shadow: 0 2px 5px 1px rgb(64 60 67 / 16%);
+  width: 100%;
+  margin: 0 auto;
+  border-radius: 5px;
+  padding: 5px;
+  gap: 1rem;
+}
+
+@media only screen and (max-width: 992px) {
+  .logo {
+    height: 20px;
+    width: 20px;
+  }
+
+  .user-name {
+    display: none;
+  }
+  .cat-content {
+    padding-left: 10px;
+  }
+
+  .cat-footer {
+    font-size: 5px;
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  .cat-header-right {
+    display: none;
+  }
+
+  .cat-header-left {
+    min-width: 100% !important;
+  }
+
+  .additional-menu {
+    display: block;
+    color: white;
+  }
+
+  .logo,
+  .header-text {
+    margin-right: 10px;
+    font-size: 15px;
+    float: right;
+  }
+}
+
+.tooltip {
+  position: fixed;
+  padding: 7px;
+  background-color: rgba(97, 97, 97, 0.87);
+  border: 1px solid #616161;
+  border-radius: 4px;
+  pointer-events: none;
+  width: 150px;
+  color: white;
+}
+
+.grid-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+.grid-2 {
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.grid-3 {
+  grid-template-columns: 1fr 1fr 1fr;
+}
+
+.grid-4 {
+  grid-template-columns: repeat(4, 1fr);
+}

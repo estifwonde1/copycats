@@ -1,0 +1,29 @@
+#container {
+    display: flex;
+    height: 50px;
+}
+
+p-dropdown {
+    width: 25% !important;
+    margin-right: 10px;
+}
+
+button {
+    height: 40px;
+    margin-left: 10px;
+}
+
+.card {
+    display: flex;
+    justify-content: space-between;
+    height: 60px;
+    padding-top: 10px;
+}
+
+.highlight {
+    color: #800020;
+}
+
+mat-card {
+    padding: 16px 0px;
+}

@@ -1,0 +1,19 @@
+<div class="filter-container">
+  <p-dropdown [options]="currentUserWarehouses$|async"
+              [(ngModel)]="selectedWarehouse" 
+              placeholder="Warehouse" 
+              (onChange)="onWarehouseChange()"
+              [optionLabel]="'name'">
+  </p-dropdown>
+</div>
+<cats-toolbar [actions]="actions"
+             (actionClick)="onCreate()"
+             >
+</cats-toolbar>
+<cats-list [columns]="columns"
+          [caption]="'Stores'"
+          [actions]="tableActions"
+          [hasAction]="true"
+          [data]="stores$|async"
+          (actionClick)="onEdit($event)">
+</cats-list>

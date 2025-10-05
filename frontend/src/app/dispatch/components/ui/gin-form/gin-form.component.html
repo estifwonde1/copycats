@@ -1,0 +1,79 @@
+<h2 mat-dialog-title>GIN</h2>
+<div mat-dialog-content>
+    <form [formGroup]="form" (submit)="onSubmit()">
+        <mat-form-field class="full-width">
+            <input matInput type="text" placeholder="Receipt No" formControlName="receipt_no" (blur)="blur()">
+            <mat-error *ngIf="displayMessage.receipt_no">{{ displayMessage.receipt_no }}</mat-error>
+        </mat-form-field>
+        <mat-form-field class="full-width">
+            <input matInput type="text" placeholder="Department" formControlName="department" (blur)="blur()">
+            <mat-error *ngIf="displayMessage.department">{{ displayMessage.department }}</mat-error>
+        </mat-form-field>
+        <mat-form-field class="full-width">
+            <input matInput type="text" placeholder="Account No" formControlName="account_no" (blur)="blur()">
+            <mat-error *ngIf="displayMessage.account_no">{{ displayMessage.account_no }}</mat-error>
+        </mat-form-field>
+        <mat-form-field class="full-width">
+            <input matInput type="text" placeholder="Weight Bridge Ticket No" formControlName="wt_bridge_ticket_no" (blur)="blur()">
+            <mat-error *ngIf="displayMessage.wt_bridge_ticket_no">{{ displayMessage.wt_bridge_ticket_no }}</mat-error>
+        </mat-form-field>
+        <mat-form-field class="full-width">
+            <input matInput type="text" placeholder="Container Type" formControlName="container_type" (blur)="blur()">
+            <mat-error *ngIf="displayMessage.container_type">{{ displayMessage.container_type }}</mat-error>
+        </mat-form-field>
+        <mat-form-field class="full-width">
+            <input matInput type="text" placeholder="Number of containers" formControlName="no_of_containers" (blur)="blur()">
+            <mat-error *ngIf="displayMessage.no_of_containers">{{ displayMessage.no_of_containers }}</mat-error>
+        </mat-form-field>
+        <mat-form-field class="full-width">
+            <input matInput type="text" placeholder="Gross" formControlName="gross" (blur)="blur()">
+            <mat-error *ngIf="displayMessage.gross">{{ displayMessage.gross }}</mat-error>
+        </mat-form-field>
+        <mat-form-field class="full-width">
+            <input matInput type="text" placeholder="Net" formControlName="net" (blur)="blur()">
+            <mat-error *ngIf="displayMessage.net">{{ displayMessage.net }}</mat-error>
+        </mat-form-field>
+        <mat-form-field class="full-width">
+            <input matInput type="text" placeholder="License No" formControlName="license_no" (blur)="blur()">
+            <mat-error *ngIf="displayMessage.license_no">{{ displayMessage.license_no }}</mat-error>
+        </mat-form-field>
+        <mat-form-field class="full-width">
+            <input matInput type="text" placeholder="Driver Region" formControlName="driver_region" (blur)="blur()">
+            <mat-error *ngIf="displayMessage.driver_region">{{ displayMessage.driver_region }}</mat-error>
+        </mat-form-field>
+        <mat-form-field class="full-width">
+            <input matInput type="text" placeholder="Driver Woreda" formControlName="driver_woreda" (blur)="blur()">
+            <mat-error *ngIf="displayMessage.driver_woreda">{{ displayMessage.driver_woreda }}</mat-error>
+        </mat-form-field>
+        <mat-form-field class="full-width">
+            <input matInput type="text" placeholder="Driver Kebele" formControlName="driver_kebele" (blur)="blur()">
+            <mat-error *ngIf="displayMessage.driver_kebele">{{ displayMessage.driver_kebele }}</mat-error>
+        </mat-form-field>
+        <mat-form-field class="full-width">
+            <input matInput type="text" placeholder="Driver House No" formControlName="driver_house_no" (blur)="blur()">
+            <mat-error *ngIf="displayMessage.driver_house_no">{{ displayMessage.driver_house_no }}</mat-error>
+        </mat-form-field>
+        <mat-form-field class="full-width">
+            <input matInput type="text" placeholder="Driver Id No" formControlName="driver_id_no" (blur)="blur()">
+            <mat-error *ngIf="displayMessage.driver_id_no">{{ displayMessage.driver_id_no }}</mat-error>
+        </mat-form-field>
+    </form>
+</div>
+<div mat-dialog-actions align="end">
+    <button mat-raised-button
+            color="success"
+            type="submit"
+            [disabled]="!form.valid"
+            (click)="onSubmit()">
+        <mat-icon>save</mat-icon>
+        Save
+    </button>
+    &nbsp;
+    <button mat-raised-button
+            type="button"
+            color="warn"
+            (click)="onCancel()">
+        <mat-icon>remove_circle</mat-icon>
+        Cancel
+    </button>
+</div>

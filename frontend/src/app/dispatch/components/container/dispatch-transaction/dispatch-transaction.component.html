@@ -1,0 +1,48 @@
+<div class="filter-container">
+    <p-dropdown [options]="authorizedDispatches$|async" 
+                [(ngModel)]="selectedAuthorizedDispatch" 
+                placeholder="Select Dispatch Authorization" 
+                (onChange)="onAuthorizedDispatchChange()" 
+                optionLabel="label"
+                [filter]="true"
+                filterBy="label">
+    </p-dropdown>
+</div>
+<div class="grid col-5" *ngIf="selectedAuthorizedDispatch">
+        <div class="item">
+            <h3 class="title"><span>Dispatch: </span>{{selectedAuthorizedDispatch?.dispatch_reference_no}}</h3>
+        </div>
+        <div class="item">
+            <h3 class="title"><span>Driver Name: </span>{{selectedAuthorizedDispatch?.driver_name}}</h3>
+        </div>
+        <div class="item">
+          <h3 class="title"><span>Plate No: </span>{{selectedAuthorizedDispatch?.plate_no}}</h3>
+        </div>
+        <div class="item">
+          <h3 class="title"><span>Authorized Quantity: </span>
+            {{selectedAuthorizedDispatch?.quantity}} {{selectedAuthorizedDispatch?.unit_abbreviation}}
+          </h3>
+        </div>
+        <div class="item">
+          <h3 class="title">
+            <span>Remaining Quantity: </span>
+            <span class="remaining-value">
+                {{selectedAuthorizedDispatch?.quantity-(currentReceiptQuantity$|async)}}
+                 {{selectedAuthorizedDispatch?.unit_abbreviation}}
+            </span>
+          </h3>
+        </div>
+</div>
+<p-confirmDialog header="Confirmation" icon="pi pi-exclamation-triangle"></p-confirmDialog>
+
+<cats-toolbar [actions]="actions"
+             (actionClick)="onToolbarActionClick($event)">
+</cats-toolbar>
+
+<cats-list [columns]="columns"
+           [caption]="caption"
+           [actions]="tableActions"
+           [hasAction]="true"
+           [data]="dispatchTransactions$|async"
+           (actionClick)="onEdit($event)">
+</cats-list>

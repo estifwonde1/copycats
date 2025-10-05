@@ -1,0 +1,137 @@
+<h2 mat-dialog-title>Dispatch Plan</h2>
+<div mat-dialog-content>
+    <form [formGroup]="form" (submit)="onSubmit()" >
+        <mat-form-field class="full-width">
+            <input matInput type="text" placeholder="Dispatch Plan Reference" formControlName="reference_no" (blur)="blur()">
+            <mat-error *ngIf="displayMessage.reference_no">{{ displayMessage.reference_no }}</mat-error>
+        </mat-form-field>
+        <mat-form-field class="full-width">
+            <mat-select formControlName="dispatchable_id" 
+                        placeholder="Monthly Plan" 
+                        (blur)="blur()"
+                        (selectionChange)="onRoundPlanChange()">
+              <mat-option *ngFor="let monthlyPlan of monthlyPlans$|async" [value]="monthlyPlan.id">
+                {{monthlyPlan.reference_no}}
+              </mat-option>
+            </mat-select>
+            <mat-error *ngIf="displayMessage.dispatchable_id">{{ displayMessage.dispatchable_id }}</mat-error>
+        </mat-form-field>
+        <fieldset>
+            <legend>Dispatch Plan Items</legend>
+            <mat-form-field class="full-width">
+                <input type="text"
+                       placeholder="Filter By Zone"
+                       matInput
+                       formControlName="zone_id"
+                       [matAutocomplete]="zone">
+                <mat-autocomplete #zone="matAutocomplete" [displayWith]="zoneLocationDisplayFn" 
+                                  (optionSelected)="onZoneSelect($event.option.value)">
+                  <mat-option *ngFor="let zone of zones$ | async" [value]="zone">
+                    {{zone.name}}
+                  </mat-option>
+                </mat-autocomplete>
+              </mat-form-field>
+            <mat-form-field class="full-width">
+                <mat-select placeholder="Commodity Category" (selectionChange)="onCommodityCategoryCahnge($event)">
+                  <mat-option *ngFor="let cc of commodityCategories" [value]="cc">
+                    {{cc}}
+                  </mat-option>
+                </mat-select>
+            </mat-form-field>
+            <mat-form-field class="full-width">
+                <input matInput type="text" 
+                       placeholder="Requisition Number" 
+                       formControlName="dispatch_plan_item_reference_no" 
+                       (blur)="blur()">
+            </mat-form-field>
+            <mat-form-field class="full-width">
+                <mat-select formControlName="source" 
+                            placeholder="Source" 
+                            (blur)="blur()">
+                  <mat-option *ngFor="let source of sources$|async" [value]="source">
+                    {{source.name}}
+                  </mat-option>
+                </mat-select>
+            </mat-form-field>
+            <mat-form-field class="full-width">
+                <mat-select formControlName="commodity" 
+                            placeholder="Batch No." 
+                            (blur)="blur()">
+                  <mat-option *ngFor="let commodity of commodities$|async" [value]="commodity">
+                    {{commodity.batch_no}}
+                  </mat-option>
+                </mat-select>
+            </mat-form-field>
+            <button mat-raised-button
+                    color="success"
+                    (click)="onApply()"
+                    [disabled]="!(selectedItems?.length > 0)"
+                    type="button">
+                <mat-icon>done</mat-icon>
+                Apply
+            </button>
+            &nbsp;&nbsp;
+            <button mat-raised-button
+                    color="warn"
+                    (click)="onClearZoneFilter()"
+                    [disabled]="!(selectedItems?.length > 0)"
+                    type="button">
+                <mat-icon>clear_all</mat-icon>
+                Clear
+            </button>
+            <p-table [value]="items$|async" dataKey="id" [(selection)]="selectedItems" responsiveLayout="scroll">
+                <ng-template pTemplate="header">
+                    <tr>
+                        <th style="width: 3rem">
+                            <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+                        </th>
+                        <th>Requisition Number</th>
+                        <th>Source</th>
+                        <th>Zone</th>
+                        <th>Woreda</th>
+                        <th>Destination</th>
+                        <th>Commodity</th>
+                        <th>Commodity Batch Number</th>
+                        <th>Quantity</th>
+                        <th>Unit</th>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-item>
+                    <tr>
+                        <td>
+                            <p-tableCheckbox [value]="item"></p-tableCheckbox>
+                        </td>
+                        <td>{{item.reference_no}}</td>
+                        <td>{{item.source_name}}</td>
+                        <td>{{item.zone}}</td>
+                        <td>{{item.woreda}}</td>
+                        <td>{{item.fdp}}</td>
+                        <td>{{item.commodity_category}}</td>
+                        <td>{{item.commodity_batch_no}}</td>
+                        <td>{{item.quantity}}</td>
+                        <td>{{item.unit}}</td>
+                    </tr>
+                </ng-template>
+              </p-table>
+        </fieldset>
+    </form>
+</div>
+
+<div mat-dialog-actions align="end">
+    <button mat-raised-button
+    color="success"
+    type="submit"
+    [disabled]="!form.valid"
+    (click)="onSubmit()">
+  <mat-icon>save</mat-icon>
+  Save
+</button>
+&nbsp;
+<button mat-raised-button
+    type="button"
+    color="warn"
+    (click)="onCancel()">
+  <mat-icon>remove_circle</mat-icon>
+  Cancel
+</button>
+</div>

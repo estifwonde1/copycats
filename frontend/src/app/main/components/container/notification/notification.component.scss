@@ -1,0 +1,26 @@
+.container {
+  margin: 10px;
+}
+
+p-listbox {
+  flex-grow: 1;
+}
+
+h1 {
+  font-family: monospace;
+}
+
+.notification-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.unread-font-weight {
+  font-weight: 500;
+}
+
+.notification-content {
+  color: #605e5c;
+  margin-left: 5px;
+  white-space: pre;
+}

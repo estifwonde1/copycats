@@ -1,0 +1,27 @@
+.flex-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 700px;
+}
+
+.flex-item {
+  min-width: 100%;
+}
+
+.login-logo {
+  width: "200px";
+}
+
+@media only screen and (max-width: 992px) {
+  .flex-container {
+    height: 500px;
+  }
+}
+
+@media only screen and (max-width: 1000px) {
+  .flex-container {
+    height: 500px;
+  }
+}

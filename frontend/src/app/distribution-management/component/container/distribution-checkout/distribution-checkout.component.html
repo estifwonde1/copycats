@@ -1,0 +1,26 @@
+<div class="filter">
+    <p-dropdown [options]="roundPlans$|async"
+                [(ngModel)]="selectedRoundPlan"
+                optionLabel="reference_no"
+                placeholder='Select Round Plan'
+                [filter]="true"
+                filterBy="reference_no">
+    </p-dropdown>
+    <p-dropdown [options]="stores$|async"
+                [(ngModel)]="selectedStore"
+                optionLabel="name"
+                [disabled] = "!selectedRoundPlan"
+                (onChange) = onStoreChange()
+                placeholder='Select Store'
+                [filter]="true"
+                filterBy="name">
+    </p-dropdown>
+</div>
+
+<cats-list [columns]="columns"
+          [caption]="'Round Beneficiaries'"
+          [actions]="tableActions"
+          [hasAction]="true"
+          [data]="roundBeneficiaries$|async"
+          (actionClick)="handleAction($event)">
+</cats-list>

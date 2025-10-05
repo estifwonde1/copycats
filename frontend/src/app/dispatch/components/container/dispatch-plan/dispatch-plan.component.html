@@ -1,0 +1,10 @@
+<cats-toolbar [actions]="actions"
+             (actionClick)="onToolbarClick($event)">
+</cats-toolbar>
+<cats-list [columns]="columns"
+           [caption]="caption"
+           [actions]="tableActions"
+           [hasAction]="true"
+           [data]="dispatchPlans$|async"
+           (actionClick)="onClick($event)">
+</cats-list>

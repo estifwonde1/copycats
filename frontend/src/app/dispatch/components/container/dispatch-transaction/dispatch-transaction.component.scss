@@ -1,0 +1,17 @@
+.flex {
+    display: flex;
+}
+
+.grid {
+    display: grid;
+}
+
+.col-5 {
+    grid-template-columns: repeat(5, 1fr);
+}
+
+@media only screen and (max-width: 1500px) {
+        .col-5 {
+            grid-template-columns: repeat(2, 1fr);
+        }
+}

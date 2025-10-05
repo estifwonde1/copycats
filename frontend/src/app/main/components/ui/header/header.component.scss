@@ -1,0 +1,48 @@
+@import "colors";
+
+.cat-header-right {
+  height: 50px;
+}
+
+.header-text {
+  line-height: 50px;
+  font-size: 20px;
+  font-family: monospace;
+}
+
+.logo {
+  height: 50px;
+  width: 100px;
+}
+
+.toggle-menu-button {
+  text-align: center;
+  height: 50px;
+  width: 50px;
+  background-color: $header-footer-bg-color;
+  a {
+    cursor: pointer;
+  }
+}
+
+.icon {
+  line-height: 50px;
+  font-size: 20px;
+  padding: 10px;
+}
+
+.right-menu {
+  cursor: pointer;
+}
+
+::ng-deep .mat-menu-panel {
+  max-height: calc(100vh - 188px) !important;
+}
+
+.notification-date {
+  font-size: 12px;
+  color: rgb(107, 119, 140);
+  font-weight: 600;
+  text-transform: uppercase;
+  margin: 10px;
+}

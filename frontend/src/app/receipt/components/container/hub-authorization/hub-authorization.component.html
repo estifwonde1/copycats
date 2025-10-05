@@ -1,0 +1,62 @@
+<div id="container">
+    <p-dropdown [options]="authorizationTypes"
+     [(ngModel)]="selectedAuthorizationType"
+     optionLabel="name"
+     placeholder="Select Authorization Type"
+     (onChange)="onAuthorizationTypeChange($event)"
+     ></p-dropdown>
+
+     <p-dropdown [options]="allocationItems$ | async"
+      (onChange)="onAllocationItemChange($event)"
+      [(ngModel)]="selectedAllocationItem"
+      [disabled]="!selectedAuthorizationType"
+      placeholder="Select Allocation Item"
+      [filter]="true"
+      filterBy="reference_no">
+        <ng-template pTemplate="selectedItem">
+            <div *ngIf="selectedAllocationItem">
+                <div>{{selectedAllocationItem.reference_no}}</div>
+            </div>
+        </ng-template>
+        <ng-template let-planItem pTemplate="item">
+            <div>
+                <div>{{planItem.reference_no}}</div>
+            </div>
+        </ng-template>
+    </p-dropdown>
+
+    <button mat-raised-button
+          color="success"
+          type="button"
+          matTooltip="Authorize list"
+          [disabled]="!selectedAllocationItem"
+          (click)="onAuthorizeButtonClick()">
+        <mat-icon>done</mat-icon>
+        Authorize
+    </button>
+</div>
+
+<div *ngIf="selectedAllocationItem">
+    <mat-card>
+        <div class="card">
+            <div>Quantity: <span id="balance">
+                <b>{{selectedAllocationItem.quantity}} {{selectedAllocationItem.unit_abbreviation}}</b></span>
+            </div>
+            <div>Commodity Status: <span id="status"><b>{{selectedAllocationItem.commodity_status}}</b></span></div>
+        </div>
+    </mat-card>
+</div>
+
+<cats-toolbar
+ [actions]=actions
+ (actionClick)="onActionClick($event)"
+>
+</cats-toolbar>
+
+<cats-list [columns]="columns"
+          [caption]="'Dispatch/ Receipt Authorization'"
+          [actions]="tableActions"
+          [hasAction]="true"
+          [data]="hubAuthorizations$|async"
+          (actionClick)="onSideButtonClick($event)">
+</cats-list>

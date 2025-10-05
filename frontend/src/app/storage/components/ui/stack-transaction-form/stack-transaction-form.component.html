@@ -1,0 +1,47 @@
+<h2 mat-dialog-title>{{data.title}}</h2>
+<div mat-dialog-content>
+  <form [formGroup]="form" (submit)="onSubmit()" >
+    <mat-form-field class="full-width">
+      <mat-select  placeholder="Stack" formControlName="destination_id" (blur)="blur()">
+          <mat-option *ngFor="let s of stacks$ | async" [value]="s.id">
+          {{s.code}}
+          </mat-option>
+      </mat-select>
+      <mat-error *ngIf="displayMessage.destination_id">{{ displayMessage.destination_id }}</mat-error>
+    </mat-form-field>
+    <mat-form-field class="full-width">
+        <input matInput type="date" placeholder="Date" formControlName="transaction_date" (blur)="blur()">
+        <mat-error *ngIf="displayMessage.transaction_date">{{ displayMessage.transaction_date }}</mat-error>
+    </mat-form-field>
+    <mat-form-field class="full-width">
+        <input matInput type="number" placeholder="Quantity" formControlName="quantity" (blur)="blur()">
+        <mat-error *ngIf="displayMessage.quantity">{{ displayMessage.quantity }}</mat-error>
+    </mat-form-field>
+    <mat-form-field class="full-width">
+      <mat-select  placeholder="Unit of Measure" formControlName="unit_id" (blur)="blur()">
+          <mat-option *ngFor="let u of unitOfMeasures$ | async" [value]="u.id">
+          {{u.abbreviation}}
+          </mat-option>
+      </mat-select>
+      <mat-error *ngIf="displayMessage.unit_id">{{ displayMessage.unit_id }}</mat-error>
+    </mat-form-field>
+</form>
+</div>
+<mat-dialog-actions align="end">
+  <button mat-raised-button
+          color="success"
+          type="submit"
+          [disabled]="form.invalid"
+          (click)="onSubmit()">
+        <mat-icon>save</mat-icon>
+        Save
+  </button>
+  &nbsp;
+  <button mat-raised-button
+          type="button"
+          color="warn"
+          (click)="onCancel()">
+        <mat-icon>remove_circle</mat-icon>
+        Cancel
+  </button>
+</mat-dialog-actions>

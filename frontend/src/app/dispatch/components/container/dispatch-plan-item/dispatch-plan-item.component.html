@@ -1,0 +1,45 @@
+<div *ngIf="!dispatchPlanId" class="filter">
+    <p-dropdown [options]="dispatchPlans$|async"
+                [(ngModel)]="selectedDispatchPlan"
+                optionLabel="reference_no"
+                placeholder='Select Dispatch Plan'
+                (onChange)="onDispatchPlanChange()">
+    </p-dropdown>
+  </div>
+  <div class="container grid-container">
+    <div class="item">
+      <h3 class="title"><span>Dispatch Plan Reference Number: </span>
+        {{selectedDispatchPlan ? selectedDispatchPlan.reference_no : (dispatchPlan$|async)?.reference_no}}</h3>
+    </div>
+    <div style="display: flex;">
+      <mat-form-field>
+        <input matInput
+               placeholder="Enter Requisition Number"
+               [(ngModel)]="requisitionNumber">
+      </mat-form-field>
+      <button mat-raised-button
+              (click)="onPrintRequisition()"
+              style="height: 37px; margin-left: 10px;">
+        Print PDF
+      </button>
+      <button mat-raised-button
+              (click)="onPrintRequisitionInExcel()"
+              style="height: 37px; margin-left: 10px;">
+        Print xlsx
+      </button>
+    </div>
+  </div>
+  <cats-toolbar *ngIf="dispatchPlanId"
+               [actions]="actions"
+               (actionClick)="onToolbarActionClick($event)"
+               >
+  </cats-toolbar>
+  <p-breadcrumb *ngIf="dispatchPlanId" [model]="items"></p-breadcrumb>
+  <p-confirmDialog header="Confirmation" icon="pi pi-exclamation-triangle"></p-confirmDialog>
+  <cats-list [columns]="columns"
+            [caption]="caption"
+            [actions]="tableActions"
+            [hasAction]="true"
+            [data]="dispatchPlanItems$|async"
+            (actionClick)="onClick($event)">
+  </cats-list>

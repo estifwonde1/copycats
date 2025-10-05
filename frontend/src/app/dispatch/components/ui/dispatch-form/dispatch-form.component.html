@@ -1,0 +1,68 @@
+<h2 mat-dialog-title>{{data.title}}</h2>
+<div mat-dialog-content>
+  <form [formGroup]="form" (submit)="onSubmit()" >
+    <mat-form-field class="full-width">
+      <input matInput type="text" placeholder="Reference number" formControlName="reference_no" (blur)="blur()">
+      <mat-error *ngIf="displayMessage.reference_no">{{ displayMessage.reference_no }}</mat-error>
+    </mat-form-field>
+    <mat-form-field class="full-width">
+      <mat-select formControlName="transporter_id" 
+                  placeholder="Transporter" 
+                  (blur)="blur()">
+        <mat-option *ngFor="let transporter of transporters$|async" [value]="transporter.id">
+          {{transporter.name}}
+        </mat-option>
+      </mat-select>
+      <mat-error *ngIf="displayMessage.transporter_id">{{ displayMessage.transporter_id }}</mat-error>
+    </mat-form-field>
+    <mat-form-field class="full-width">
+      <input matInput type="text" placeholder="Plate number" formControlName="plate_no" (blur)="blur()">
+      <mat-error *ngIf="displayMessage.plate_no">{{ displayMessage.plate_no }}</mat-error>
+    </mat-form-field>
+    <mat-form-field class="full-width">
+      <input matInput type="text" placeholder="Driver Name" formControlName="driver_name" (blur)="blur()">
+      <mat-error *ngIf="displayMessage.driver_name">{{ displayMessage.driver_name }}</mat-error>
+    </mat-form-field>
+    <mat-form-field class="full-width">
+      <input matInput type="text" placeholder="Driver Phone" formControlName="driver_phone" (blur)="blur()">
+      <mat-error *ngIf="displayMessage.driver_phone">{{ displayMessage.driver_phone }}</mat-error>
+    </mat-form-field>
+    <mat-form-field class="full-width">
+      <mat-select  placeholder="Unit of Measure" formControlName="unit_id" (blur)="blur()">
+          <mat-option *ngFor="let uom of unitOfMeasures | async" [value]="uom.id">
+          {{uom.abbreviation}}
+          </mat-option>
+      </mat-select>
+      <mat-error *ngIf="displayMessage.unit_id">{{ displayMessage.unit_id }}</mat-error>
+    </mat-form-field>
+    <mat-form-field class="full-width">
+      <mat-select formControlName="commodity_status" placeholder="Commodity Status" (blur)="blur()">
+        <mat-option *ngFor="let commodityStatus of commodityStatuses" [value]="commodityStatus">
+          {{commodityStatus}}
+        </mat-option>
+      </mat-select>
+      <mat-error *ngIf="displayMessage.commodity_status">{{ displayMessage.commodity_status }}</mat-error>
+    </mat-form-field>
+    <mat-form-field class="full-width">
+        <textarea matInput placeholder="Remark" formControlName="remark"></textarea>
+    </mat-form-field>
+  </form>
+</div>
+<mat-dialog-actions align="end">
+  <button mat-raised-button
+          color="success"
+          type="submit"
+          [disabled]="!form.valid"
+          (click)="onSubmit()">
+        <mat-icon>save</mat-icon>
+        Save
+  </button>
+  &nbsp;
+  <button mat-raised-button
+          type="button"
+          color="warn"
+          (click)="onCancel()">
+        <mat-icon>remove_circle</mat-icon>
+        Cancel
+  </button>
+</mat-dialog-actions>

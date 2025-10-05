@@ -1,0 +1,47 @@
+<h2 mat-dialog-title>{{data.title}}</h2>
+<div mat-dialog-content>
+    <form [formGroup]="form" (submit)="onSubmit()">
+        <mat-form-field class="full-width">
+            <mat-select formControlName="role_id" placeholder="Role" (blur)="blur()" (selectionChange)="onRoleChange($event)">
+              <mat-option *ngFor="let role of roles$|async" [value]="role.id">
+                {{role.name}}
+              </mat-option>
+            </mat-select>
+            <mat-error *ngIf="displayMessage.role_id">{{displayMessage.role_id}}</mat-error>
+        </mat-form-field>
+        <mat-form-field class="full-width" *ngIf="form.value.role_id && (warehouses$|async).length > 0">
+          <mat-select formControlName="warehouse_id" placeholder="Warehouse" (blur)="blur()">
+            <mat-option *ngFor="let warehouse of warehouses$|async" [value]="warehouse.id">
+              {{warehouse.name}}
+            </mat-option>
+          </mat-select>
+          <mat-error *ngIf="displayMessage.warehouse_id">{{displayMessage.warehouse_id}}</mat-error>
+      </mat-form-field>
+      <mat-form-field class="full-width" *ngIf="form.value.role_id && (hubs$|async).length > 0">
+        <mat-select formControlName="hub_id" placeholder="Hub" (blur)="blur()">
+          <mat-option *ngFor="let hub of hubs$|async" [value]="hub.id">
+            {{hub.name}}
+          </mat-option>
+        </mat-select>
+        <mat-error *ngIf="displayMessage.hub_id">{{displayMessage.hub_id}}</mat-error>
+    </mat-form-field>
+    </form>
+</div>
+<div mat-dialog-actions align="end">
+    <button mat-raised-button
+            color="success"
+            type="submit"
+            [disabled]="!form.valid"
+            (click)="onSubmit()">
+        <mat-icon>save</mat-icon>
+        Save
+    </button>
+    &nbsp;
+    <button mat-raised-button
+            type="button"
+            color="warn"
+            (click)="onCancel()">
+        <mat-icon>remove_circle</mat-icon>
+        Cancel
+    </button>
+</div>

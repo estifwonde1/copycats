@@ -1,0 +1,41 @@
+<div class="filter-grid">
+    <p-dropdown [options]="stores$|async"
+                [(ngModel)]="selectedStore"
+                optionLabel="name"
+                placeholder='Select Store'>
+    </p-dropdown>
+    <p-dropdown [options]="stackStatuses"
+                [(ngModel)]="selectedStackStatus"
+                optionLabel="value"
+                placeholder='Select Stack Status'
+                (onChange)="onStackStatusChange()">
+    </p-dropdown>
+    <p-dropdown [options]="stacks$|async"
+                [(ngModel)]="selectedStack"
+                optionLabel="code"
+                placeholder='Select Statck'
+                (onChange)="onStackChange()">
+    </p-dropdown>
+</div>
+<div *ngIf="selectedStack">
+    <mat-card>
+        <div class="card">
+            <div>Commodity Batch: <span id="status"><b>{{selectedStack.commodity_batch_no}}</b></span></div>
+            <div>Commodity Status: <span id="status"><b>{{selectedStack.commodity_status}}</b></span></div>
+            <div>Quantity: <span id="balance">
+                <b>{{(balance).toFixed(2)}} qt</b></span></div>
+        </div>
+    </mat-card>
+</div>
+<div class="content">
+    <cats-list [columns]="receiptColumns"
+          [caption]="'Receipts'"
+          [hasAction]="false"
+          [data]="receiptTransactions">
+    </cats-list>
+    <cats-list [columns]="dispatchColumns"
+          [caption]="'Issues'"
+          [hasAction]="false"
+          [data]="dispatchTransactions">
+    </cats-list>
+</div>

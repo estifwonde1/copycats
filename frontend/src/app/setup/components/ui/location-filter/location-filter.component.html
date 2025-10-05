@@ -1,0 +1,19 @@
+<div class="filter-container">
+  <div class="location-type-filter">
+    <p-dropdown [options]="locationTypes"
+                [(ngModel)]="selectedLocationType" 
+                placeholder="Location Types" 
+                (onChange)="onLocationTypeChange()">
+    </p-dropdown>
+  </div>
+  <div class="filter-item">
+    <div class="filter-item-child" *ngFor="let locationAncestry of selectedLocationAncestries">
+      <p-dropdown [options]="locationAncestry.options|async" 
+                  [(ngModel)]="locationAncestry.value" 
+                  [placeholder]="locationAncestry.placeholder" 
+                  (onChange)="locationAncestry.changeHandler(locationAncestry.value) || null" 
+                  [optionLabel]="'name'">
+      </p-dropdown>
+    </div>
+  </div>
+</div>

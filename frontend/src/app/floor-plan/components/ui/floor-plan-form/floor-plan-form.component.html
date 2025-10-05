@@ -1,0 +1,61 @@
+<h2 mat-dialog-title>{{data.title}}</h2>
+<div mat-dialog-content>
+  <form [formGroup]="form" (submit)="onSave()">
+    <mat-form-field class="full-width">
+      <input matInput type="text" placeholder="Code" formControlName="code" (blur)="blur()">
+      <mat-error *ngIf="displayMessage.code">{{ displayMessage.code }}</mat-error>
+    </mat-form-field>
+    <mat-form-field class="full-width">
+      <input matInput type="number" placeholder="Start X" formControlName="start_x" (blur)="blur()">
+      <mat-error *ngIf="displayMessage.start_x">{{ displayMessage.start_x }}</mat-error>
+    </mat-form-field>
+    <mat-form-field class="full-width">
+      <input matInput type="number" placeholder="Start Y" formControlName="start_y" (blur)="blur()">
+      <mat-error *ngIf="displayMessage.start_y">{{ displayMessage.start_y }}</mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="full-width">
+      <input matInput type="number" placeholder="Width" formControlName="width" (blur)="blur()">
+      <mat-error *ngIf="displayMessage.width">{{ displayMessage.width }}</mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="full-width">
+      <input matInput type="number" placeholder="Length" formControlName="length" (blur)="blur()">
+      <mat-error *ngIf="displayMessage.length">{{ displayMessage.length }}</mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="full-width">
+      <input matInput type="number" placeholder="Height" formControlName="height" (blur)="blur()">
+      <mat-error *ngIf="displayMessage.height">{{ displayMessage.height }}</mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="full-width">
+      <mat-select formControlName="commodity_status" placeholder="Commodity Status" (blur)="blur()">
+        <mat-option *ngFor="let cs of commodityStatuses" [value]="cs">
+          {{cs}}
+        </mat-option>
+      </mat-select>
+      <mat-error *ngIf="displayMessage.commodity_status">{{ displayMessage.commodity_status }}</mat-error>
+    </mat-form-field>
+  </form>
+</div>
+<div mat-dialog-actions align="end">
+  <div class="button-row">
+    <button mat-stroked-button
+            color="primary"
+            type="submit"
+            [disabled]="!form.valid"
+            (click)="onSave()">
+      <mat-icon>save</mat-icon>
+      Save
+    </button>
+    &nbsp;
+    <button mat-stroked-button
+            type="button"
+            color="accent"
+            (click)="onDiscard()">
+      <mat-icon>remove_circle</mat-icon>
+      Discard
+    </button>
+  </div>
+</div>

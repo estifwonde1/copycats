@@ -1,0 +1,40 @@
+<div class="filter">
+    <p-dropdown [options]="dispatches$|async" 
+                [(ngModel)]="selectedDispatch" 
+                placeholder="Select Dispatch" 
+                (onChange)="onDispatchChange()" 
+                optionLabel="reference_no"
+                [filter]="true"
+                filterBy="reference_no">
+    </p-dropdown>
+
+    <p-dropdown [options]="dispatchAuthorizations$ | async"
+      [(ngModel)]="selectedDispatchAuthorization"
+      placeholder="Select Dispatch Authorization"
+      [filter]="true"
+      filterBy="store_name">
+        <ng-template pTemplate="selectedItem">
+            <div *ngIf="selectedDispatchAuthorization">
+                <div>
+                    {{selectedDispatchAuthorization.dispatch_reference_no}} - 
+                    {{selectedDispatchAuthorization.store_name}}
+                </div>
+            </div>
+        </ng-template>
+        <ng-template let-dispatchAuthorization pTemplate="item">
+            <div>
+                <div>{{dispatchAuthorization.dispatch_reference_no}} - 
+                    {{dispatchAuthorization.store_name}} </div>
+            </div>
+        </ng-template>
+    </p-dropdown>
+
+    <button mat-raised-button
+            color="success"
+            class="print-button"
+            [disabled]="!selectedDispatchAuthorization"
+            (click)="onPrintButtonClicked()">
+        <mat-icon>print</mat-icon>
+        Print
+    </button>
+</div>

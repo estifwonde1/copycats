@@ -1,0 +1,23 @@
+#confirmBtn {
+    margin: 10px 5px 0 0;
+}
+
+.commodity-info {
+    flex-direction: row;
+    justify-content: space-between;
+    margin: 10px 0;
+    padding: 0 10px;
+}
+
+.receipt-wrap {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+}
+
+@media only screen and (max-width: 1500px) {
+    .receipt-wrap {
+        display: grid;
+        grid-template-columns: 1fr;
+    }
+}

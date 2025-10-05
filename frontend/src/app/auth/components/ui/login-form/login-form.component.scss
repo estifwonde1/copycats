@@ -1,0 +1,31 @@
+#loginbtn {
+  color: white !important;
+  outline: 0 !important;
+}
+
+mat-card {
+  max-width: 400px;
+  margin: 2em auto;
+  text-align: center;
+}
+
+mat-form-field {
+  display: block;
+}
+
+mat-card-title {
+  font-weight: lighter;
+  font-size: large;
+}
+
+mat-spinner {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  z-index: 1000;
+}
+
+.mat-icon {
+  font-size: 15px;
+}
+

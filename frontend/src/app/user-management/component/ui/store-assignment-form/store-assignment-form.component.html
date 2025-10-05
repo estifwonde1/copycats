@@ -1,0 +1,74 @@
+<h2 mat-dialog-title>Store Assignment</h2>
+<div mat-dialog-content>
+    <form [formGroup]="form" (submit)="onSubmit()">
+        <mat-form-field class="full-width">
+          <mat-select placeholder="Region" (selectionChange)="onRegionChange($event)">
+            <mat-option *ngFor="let region of regions" [value]="region.id">
+              {{region.name}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field class="full-width" *ngIf="(storeType==='store_keeper')">
+          <mat-select placeholder="Hub" (selectionChange)="onHubChange($event)">
+            <mat-option *ngFor="let hub of hubs" [value]="hub.id">
+              {{hub.name}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field class="full-width" *ngIf="(storeType==='fdp_store_keeper')">
+          <mat-select placeholder="Zone" (selectionChange)="onZoneChange($event)">
+            <mat-option *ngFor="let zone of zones" [value]="zone.id">
+              {{zone.name}}
+            </mat-option>
+        </mat-select>
+        </mat-form-field>
+        <mat-form-field class="full-width" *ngIf="(storeType==='fdp_store_keeper')">
+          <mat-select placeholder="Woreda" (selectionChange)="onWoredaChange($event)">
+            <mat-option *ngFor="let woreda of woredas" [value]="woreda.id">
+              {{woreda.name}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field class="full-width" *ngIf="(storeType==='fdp_store_keeper')">
+          <mat-select placeholder="FDP" (selectionChange)="onFdpChange($event)">
+            <mat-option *ngFor="let fdp of fdps" [value]="fdp.id">
+              {{fdp.name}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field class="full-width">
+            <mat-select formControlName="warehouse_id" placeholder="Warehouse" (blur)="blur()" (selectionChange)="onStoreChange()">
+              <mat-option *ngFor="let warehouse of warehouses" [value]="warehouse.id">
+                {{warehouse.name}}
+              </mat-option>
+            </mat-select>
+            <mat-error *ngIf="displayMessage.warehouse_id">{{displayMessage.warehouse_id}}</mat-error>
+        </mat-form-field>
+        <mat-form-field class="full-width">
+            <mat-select formControlName="store_id" placeholder="Store" (blur)="blur()">
+              <mat-option *ngFor="let store of stores$|async" [value]="store.id">
+                {{store.name}}
+              </mat-option>
+            </mat-select>
+            <mat-error *ngIf="displayMessage.role_id">{{displayMessage.role_id}}</mat-error>
+        </mat-form-field>
+    </form>
+</div>
+<div mat-dialog-actions align="end">
+    <button mat-raised-button
+            color="success"
+            type="submit"
+            [disabled]="!form.valid"
+            (click)="onSubmit()">
+        <mat-icon>save</mat-icon>
+        Save
+    </button>
+    &nbsp;
+    <button mat-raised-button
+            type="button"
+            color="warn"
+            (click)="onCancel()">
+        <mat-icon>remove_circle</mat-icon>
+        Cancel
+    </button>
+</div>

@@ -1,0 +1,105 @@
+<h2 mat-dialog-title>{{data.title}}</h2>
+<div mat-dialog-content>
+  <form [formGroup]="form" (submit)="onSubmit()" >
+    <mat-form-field class="full-width">
+      <input matInput type="text" placeholder="Autherization number" formControlName="reference_no" (blur)="blur()">
+      <mat-error *ngIf="displayMessage.quantity">{{ displayMessage.quantity }}</mat-error>
+    </mat-form-field>
+    <mat-form-field class="full-width">
+      <mat-select formControlName="source_location_type" 
+                  placeholder="Source Location Type" 
+                  (blur)="blur()" 
+                  (selectionChange)="onSourceLocationTypeSelect()">
+        <mat-option *ngFor="let sourceLocationType of locationTypes" [value]="sourceLocationType">
+          {{sourceLocationType}}
+        </mat-option>
+      </mat-select>
+      <mat-error *ngIf="displayMessage.location_type">{{ displayMessage.location_type }}</mat-error>
+    </mat-form-field>
+    <mat-form-field class="full-width">
+      <input type="text"
+             placeholder="Source Location"
+             aria-label="Source"
+             matInput
+             formControlName="source"
+             [matAutocomplete]="sourceAuto">
+      <mat-autocomplete #sourceAuto="matAutocomplete" [displayWith]="displayFn">
+        <mat-option *ngFor="let source of filteredSourceLocations$|async"  [value]="source">
+          {{source.name}}
+        </mat-option>
+      </mat-autocomplete>
+    </mat-form-field>
+    <mat-form-field class="full-width">
+      <mat-select formControlName="destination_location_type" 
+                  placeholder="Destination Location Type" 
+                  (blur)="blur()" 
+                  (selectionChange)="onDestinationLocationTypeSelect()">
+        <mat-option *ngFor="let destinationType of locationTypes" [value]="destinationType">
+          {{destinationType}}
+        </mat-option>
+      </mat-select>
+      <mat-error *ngIf="displayMessage.destination_location_type">{{ displayMessage.destination_location_type }}</mat-error>
+    </mat-form-field>
+    <mat-form-field class="full-width">
+      <input type="text"
+             placeholder="Destination Location"
+             aria-label="Destination"
+             matInput
+             formControlName="destination"
+             [matAutocomplete]="auto">
+      <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
+        <mat-option *ngFor="let destination of filteredDestinationLocations$|async"  [value]="destination">
+          {{destination.name}}
+        </mat-option>
+      </mat-autocomplete>
+    </mat-form-field>
+    <mat-form-field class="full-width">
+      <input matInput type="number" placeholder="Quantity" formControlName="quantity" (blur)="blur()">
+      <mat-error *ngIf="displayMessage.quantity">{{ displayMessage.quantity }}</mat-error>
+    </mat-form-field>
+    <mat-form-field class="full-width">
+      <mat-select  placeholder="Unit of Measure" formControlName="unit_id" (blur)="blur()">
+          <mat-option *ngFor="let uom of unitOfMeasures | async" [value]="uom.id">
+          {{uom.abbreviation}}
+          </mat-option>
+      </mat-select>
+      <mat-error *ngIf="displayMessage.unit_id">{{ displayMessage.unit_id }}</mat-error>
+    </mat-form-field>
+    <mat-form-field class="full-width">
+      <mat-select formControlName="commodity_id" placeholder="Commodity" (blur)="blur()">
+        <mat-option *ngFor="let commodity of commodities$|async" [value]="commodity.id">
+          {{commodity.batch_no}}
+        </mat-option>
+      </mat-select>
+      <mat-error *ngIf="displayMessage.commodity_id">{{ displayMessage.commodity_id }}</mat-error>
+    </mat-form-field>
+    <mat-form-field class="full-width">
+      <mat-select formControlName="commodity_status" 
+                  placeholder="Commodity Status" 
+                  (blur)="blur()">
+        <mat-option *ngFor="let commodityStatus of commodityStatuses" [value]="commodityStatus">
+          {{commodityStatus}}
+        </mat-option>
+      </mat-select>
+      <mat-error *ngIf="displayMessage.commodity_status">{{ displayMessage.commodity_status }}</mat-error>
+    </mat-form-field>
+  </form>
+</div>
+<mat-dialog-actions align="end">
+  <button mat-raised-button
+          color="success"
+          type="submit"
+          [disabled]="!form.valid"
+          (click)="onSubmit()">
+        <mat-icon>save</mat-icon>
+        Save
+  </button>
+  &nbsp;
+  <button mat-raised-button
+          type="button"
+          color="warn"
+          (click)="onCancel()">
+        <mat-icon>remove_circle</mat-icon>
+        Cancel
+  </button>
+</mat-dialog-actions>

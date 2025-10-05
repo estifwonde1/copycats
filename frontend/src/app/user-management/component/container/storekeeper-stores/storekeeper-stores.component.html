@@ -1,0 +1,13 @@
+<cats-toolbar   [actions]="actions"
+               (actionClick)="onAssign()">
+</cats-toolbar>
+
+<p-confirmDialog header="Confirmation" icon="pi pi-exclamation-triangle"></p-confirmDialog>
+
+<cats-list [columns]="columns"
+          [caption]="'Store Assignment'"
+          [actions]="tableActions"
+          [hasAction]="true"
+          [data]="storekeeperStores$|async"
+          (actionClick)="confirm($event)">
+</cats-list>

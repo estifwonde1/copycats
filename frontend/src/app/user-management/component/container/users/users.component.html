@@ -1,0 +1,11 @@
+<cats-toolbar [actions]="actions"
+             (actionClick)="onCreate()">
+</cats-toolbar>
+
+<cats-list [columns]="columns"
+          [caption]="caption"
+          [actions]="tableActions"
+          [hasAction]="true"
+          [data]="users$|async"
+          (actionClick)="onClick($event)">
+</cats-list>

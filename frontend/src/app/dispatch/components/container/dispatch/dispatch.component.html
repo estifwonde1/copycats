@@ -1,0 +1,57 @@
+<div class="filter-grid">
+    <p-dropdown [options]="dispatchPlans$|async"
+                [(ngModel)]="selectedDispatchPlan"
+                optionLabel="reference_no"
+                placeholder='Select Dispatch Plan'
+                (onChange)="onDispatchPlanChange()"
+                [filter]="true"
+                filterBy="reference_no">
+    </p-dropdown>
+    <p-dropdown [options]="dispatchPlanItems$|async"
+                [(ngModel)]="selectedDispatchPlanItem"
+                optionLabel="reference"
+                placeholder='Select Dispatch Plan Item'
+                (onChange)="onDispatchPlanItemChange()"
+                [filter]="true"
+                filterBy="reference">
+    </p-dropdown>
+</div>
+<div *ngIf="selectedDispatchPlanItem" class="container grid-container grid-4">
+  <div class="item">
+    <h3 class="title">
+      <span>Commodity Name: </span>{{selectedDispatchPlanItem?.commodity_name}}
+    </h3>
+  </div>
+  <div class="item">
+    <h3 class="title">
+      <span>Requisition Number: </span>{{selectedDispatchPlanItem?.reference_no}}
+    </h3>
+  </div>
+    <div class="item">
+      <h3 class="title"><span>Total Quantity: </span>
+        {{selectedDispatchPlanItem?.quantity}}
+        {{selectedDispatchPlanItem?.unit_abbreviation}}
+      </h3>
+    </div>
+    <div class="item">
+      <h3 class="title">
+        <span>Remaining Quantity: </span>
+        <span class="remaining-value">
+          {{(selectedDispatchPlanItem?.quantity-(currentDispatchQuantity$|async)).toFixed(2)}}
+            {{selectedDispatchPlanItem?.unit_abbreviation}}
+        </span>
+      </h3>
+    </div>
+</div>
+<p-confirmDialog header="Confirmation" icon="pi pi-exclamation-triangle"></p-confirmDialog>
+<cats-toolbar [actions]="actions"
+             (actionClick)="onCreate()">
+</cats-toolbar>
+
+<cats-list [columns]="columns"
+           [caption]="caption"
+           [actions]="tableActions"
+           [hasAction]="true"
+           [data]="dispatches$|async"
+           (actionClick)="onClick($event)">
+</cats-list>

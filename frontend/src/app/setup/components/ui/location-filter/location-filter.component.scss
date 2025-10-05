@@ -1,0 +1,28 @@
+.location-type-filter {
+  margin: 5px;
+}
+
+.filter-item {
+  margin: 5px;
+  display: flex;
+  flex-flow: row wrap;
+  flex-grow: 1;
+}
+
+.filter-item-child {
+  flex-grow: 1;
+  justify-content: space-between;
+  flex-direction: row;
+}
+
+@media only screen and (max-width: 600px) {
+  .filter-item {
+    flex-flow: column wrap;
+  }
+}
+
+@media only screen and (max-width: 992px) {
+  .filter-item {
+    flex-flow: column wrap;
+  }
+}

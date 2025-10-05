@@ -1,0 +1,53 @@
+@import 'colors';
+
+:host ::ng-deep {
+  p-sidebar {
+    .p-sidebar, .p-sidebar-left {
+      z-index: 500 !important;
+    }
+  }
+}
+
+:host ::ng-deep .cat-panelmenu.p-panelmenu {
+  .p-panelmenu-icon {
+    color: $menuitem-color;
+  }
+
+  .p-panelmenu-icon:hover {
+    color: #ffffff;
+  }
+
+  .p-panelmenu-content, .p-panelmenu-header {
+    background-color: $menubar-background;
+  }
+
+  .p-panelmenu-header > a:hover {
+    background-color: $active-menuitem-bg-color;
+    color: #ffffff;
+  }
+
+  .p-panelmenu-header > a {
+    background-color: $menubar-background;
+    color: $menuitem-color;
+  }
+
+  .p-menuitem-link .p-menuitem-text, .p-menuitem-icon {
+    color: $menuitem-color !important;
+  }
+
+  .p-menuitem-link:hover {
+    background-color: $active-menuitem-bg-color !important;
+  }
+
+  .p-panelmenu-header > a:focus {
+    box-shadow: none !important;
+  }
+
+  .p-menuitem > a:focus {
+    box-shadow: none !important;
+  }
+
+  .p-menuitem-link-active {
+    background-color: $active-menuitem-bg-color !important;
+  }
+}
